@@ -1,0 +1,16 @@
+.todo-input {
+  border: 2px solid #ffd0e1 !important;
+  border-right: none !important;
+}
+
+.btn-pink {
+  background: #ff5c93;
+  color: #fff;
+  border: 2px solid #ff5c93;
+}
+
+.btn-pink:hover {
+  background: #ff3e82;
+  border-color: #ff3e82;
+  color: #fff;
+}

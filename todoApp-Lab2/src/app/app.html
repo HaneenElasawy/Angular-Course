@@ -1,0 +1,13 @@
+<div class="todo-wrapper">
+  <div class="todo-card shadow">
+    <h2 class="todo-title">📝 Todo App</h2>
+
+    <app-todo-form (addTodo)="addTodo($event)"></app-todo-form>
+
+    <app-todo-list
+      [todos]="todos()"
+      (remove)="deleteTodo($event)"
+      (toggle)="toggleTodo($event)">
+    </app-todo-list>
+  </div>
+</div>

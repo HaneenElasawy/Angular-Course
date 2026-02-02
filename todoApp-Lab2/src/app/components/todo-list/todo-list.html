@@ -1,0 +1,26 @@
+<div *ngIf="todos.length === 0" class="text-center text-muted fw-semibold py-3">
+  No tasks yet… add your first one ✨
+</div>
+
+<div
+  *ngFor="let todo of todos"
+  class="d-flex align-items-center p-3 mb-2 rounded-4 border"
+  style="border-color:#ffb6cf; background:#fff0f6;"
+>
+  <input
+    type="checkbox"
+    class="form-check-input me-3"
+    [checked]="todo.completed"
+    (change)="toggle.emit(todo.id)"
+    style="width:22px;height:22px;"
+  />
+
+  <span
+    class="fw-semibold"
+    [class.text-decoration-line-through]="todo.completed"
+    [style.opacity]="todo.completed ? '0.6' : '1'"
+    style="color:#5b1430;"
+  >
+    {{ todo.title }}
+  </span>
+</div>
