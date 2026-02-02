@@ -1,0 +1,48 @@
+.page {
+  min-height: 100vh;
+  background: #f6f7fb;
+}
+
+.title {
+  font-weight: 800;
+}
+
+.user-card {
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #e9eefc;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #274060;
+  flex: 0 0 56px;
+}
+
+.chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+.chip-admin {
+  background: #dc3545; /* red */
+}
+
+.chip-user {
+  background: #198754; /* green */
+}
+
+.chip-moderator {
+  background: #ffc107; /* yellow */
+  color: #222;
+}

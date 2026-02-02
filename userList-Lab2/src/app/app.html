@@ -1,0 +1,73 @@
+<div class="page">
+  <div class="container py-4">
+    <h1 class="title mb-3">Users</h1>
+
+    <!-- Search -->
+    <div class="search-bar mb-4">
+      <div class="input-group">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search by email..."
+          [(ngModel)]="searchEmail"
+        />
+        <button class="btn btn-primary" type="button">
+          Search
+        </button>
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="resetSearch()"
+          [disabled]="!searchEmail.trim()"
+        >
+          Reset
+        </button>
+      </div>
+      <small class="text-muted d-block mt-2">
+        Showing {{ filteredUsers.length }} user(s)
+      </small>
+    </div>
+
+    <!-- Cards -->
+    <div class="row g-3">
+      <div class="col-12 col-sm-6 col-lg-4" *ngFor="let u of filteredUsers">
+        <div class="card user-card h-100">
+          <div class="card-body d-flex gap-3">
+            <!-- Avatar -->
+            <div class="avatar">
+              <span>{{ u.username.charAt(0) }}</span>
+            </div>
+
+            <!-- Info -->
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-start justify-content-between">
+                <div>
+                  <h5 class="mb-1">{{ u.username }}</h5>
+                  <div class="text-muted small">{{ u.email }}</div>
+                </div>
+
+                <span [class]="roleClass(u.role)">
+                  {{ u.role }}
+                </span>
+              </div>
+
+              <hr class="my-2" />
+
+              <div class="small">
+                <div><b>Phone:</b> {{ u.phone }}</div>
+                <div><b>Birthdate:</b> {{ u.birthdate }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="col-12" *ngIf="filteredUsers.length === 0">
+        <div class="alert alert-warning">
+          No users found for this email.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

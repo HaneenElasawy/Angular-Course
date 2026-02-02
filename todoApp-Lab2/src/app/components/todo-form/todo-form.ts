@@ -17,5 +17,6 @@ export class TodoFormComponent {
   submit() {
     this.addTodo.emit(this.title);
     this.title = '';
+    
   }
 }

@@ -9,11 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './todo-list.css'
 })
 export class TodoListComponent {
-  @Input() todos: {
-     id: number;
-     title: string;
-     completed: boolean
-    }[] = [];
+  @Input() todos: {id: number; title: string; completed: boolean}[] = [];
   @Output() toggle = new EventEmitter<number>();
   @Output() remove = new EventEmitter<number>();
 }
