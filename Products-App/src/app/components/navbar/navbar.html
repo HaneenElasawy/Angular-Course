@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container">
+    <a
+      class="navbar-brand fw-bold"
+      routerLink="/products"
+      routerLinkActive="text-warning"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Products App
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#nav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto gap-2">
+
+        <!-- Products (default route) -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/products"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Products
+          </a>
+        </li>
+
+        <!-- Cart -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/cart"
+            routerLinkActive="active-link"
+          >
+            Cart
+          </a>
+        </li>
+
+        <!-- Login -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/login"
+            routerLinkActive="active-link"
+          >
+            Login
+          </a>
+        </li>
+
+        <!-- Register -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/register"
+            routerLinkActive="active-link"
+          >
+            Register
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

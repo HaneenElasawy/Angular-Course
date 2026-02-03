@@ -1,0 +1,41 @@
+<div class="card h-100 shadow-sm">
+  <img
+    [src]="product.image"
+    class="card-img-top product-img"
+    [alt]="product.name"
+  />
+
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p class="fw-bold mb-2">{{ product.price }} EGP</p>
+
+    <span
+      class="fw-semibold"
+      [ngClass]="{
+        'text-danger': product.stock === 0,
+        'text-success': product.stock > 0
+      }"
+    >
+      {{ product.stock === 0 ? 'Out of stock' : 'In stock' }}
+    </span>
+  </div>
+
+  <div class="card-footer bg-white border-0">
+    <div class="d-grid gap-2">
+      <a
+        class="btn btn-outline-dark"
+        [routerLink]="['/product', product.id]"
+      >
+        View Details
+      </a>
+
+      <button
+        class="btn btn-dark"
+        (click)="addToCart.emit(product)"
+        [disabled]="product.stock === 0"
+      >
+        Add to cart
+      </button>
+    </div>
+  </div>
+</div>

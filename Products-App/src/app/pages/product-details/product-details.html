@@ -1,0 +1,37 @@
+<div class="container py-4" *ngIf="product; else notFound">
+  <a routerLink="/products" class="btn btn-link p-0 mb-3">← Back to products</a>
+
+  <div class="row g-4 align-items-start">
+    <div class="col-md-5">
+      <div class="card shadow-sm">
+        <img [src]="product.image" class="w-100 details-img" [alt]="product.name" />
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <h2 class="mb-2">{{ product.name }}</h2>
+      <p class="fs-4 fw-bold">{{ product.price }} EGP</p>
+
+      <p
+        class="fw-semibold"
+        [ngClass]="{
+          'text-danger': product.stock === 0,
+          'text-success': product.stock > 0
+        }"
+      >
+        {{ product.stock === 0 ? 'Out of stock' : 'In stock' }}
+      </p>
+
+      <button class="btn btn-dark" [disabled]="product.stock === 0">
+        Add to cart
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="container py-5 text-center">
+    <h3>Product not found</h3>
+    <a routerLink="/products" class="btn btn-dark mt-3">Back</a>
+  </div>
+</ng-template>
