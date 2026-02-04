@@ -12,8 +12,8 @@ export const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
 
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', loadComponent: () => import('./pages/login/login').then(m => m.LoginComponent) },
+  { path: 'register', loadComponent: () => import('./pages/register/register').then(m => m.RegisterComponent) },
 { path: 'cart', loadComponent: () => import('./pages/cart/cart').then(m => m.CartComponent) },
 
   { path: '**', component: NotFoundComponent },
