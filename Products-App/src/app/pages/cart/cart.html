@@ -1,2 +1,63 @@
-<h2 class="mb-3">Cart</h2>
-<p class="text-muted">UI placeholder</p>
+<div class="container py-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="fw-bold mb-0">Cart</h3>
+    <a routerLink="/products" class="btn btn-outline-secondary">Back to Products</a>
+  </div>
+
+  <div *ngIf="items.length === 0" class="text-center p-5 bg-white border rounded">
+    <h5 class="fw-bold">Your cart is empty</h5>
+    <p class="text-muted mb-3">Add some products to see them here.</p>
+    <a routerLink="/products" class="btn btn-dark">Go Shopping</a>
+  </div>
+
+  <div *ngIf="items.length > 0" class="row g-3">
+    <div class="col-12 col-lg-8">
+      <div class="bg-white border rounded p-3 shadow-sm" *ngFor="let item of items">
+        <div class="d-flex gap-3 align-items-center">
+          <img
+            [src]="item.product.image"
+            [alt]="item.product.name"
+            style="width: 90px; height: 90px; object-fit: cover"
+            class="rounded border"
+          />
+
+          <div class="flex-grow-1">
+            <div class="fw-bold">{{ item.product.name }}</div>
+            <div class="text-muted">{{ item.product.price }} EGP</div>
+          </div>
+
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-outline-dark btn-sm" (click)="dec(item)">-</button>
+            <span class="fw-bold" style="min-width: 24px; text-align: center">{{ item.qty }}</span>
+            <button class="btn btn-outline-dark btn-sm" (click)="inc(item)">+</button>
+          </div>
+
+          <div class="text-end" style="min-width: 120px">
+            <div class="fw-bold">{{ item.product.price * item.qty }} EGP</div>
+            <button class="btn btn-link text-danger p-0" (click)="remove(item.product.id)">
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="bg-white border rounded p-3 shadow-sm">
+        <h5 class="fw-bold">Summary</h5>
+        <hr />
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-muted">Items</span>
+          <span class="fw-semibold">{{ items.length }}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <span class="text-muted">Total</span>
+          <span class="fw-bold">{{ total }} EGP</span>
+        </div>
+
+        <button class="btn btn-dark w-100 mb-2">Checkout</button>
+        <button class="btn btn-outline-danger w-100" (click)="clear()">Clear Cart</button>
+      </div>
+    </div>
+  </div>
+</div>

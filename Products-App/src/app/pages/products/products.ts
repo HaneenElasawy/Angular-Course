@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PRODUCTS, Product } from './product.data';
+import{ CartService } from '../../shared/cart.service';
+import { PRODUCTS } from './product.data';
+import { Product } from '../../shared/product.model';
 import { ProductCardComponent } from '../../components/product-card/product-card';
 
 @Component({
@@ -13,8 +14,9 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 })
 export class ProductsComponent {
   products: Product[] = PRODUCTS;
-
-  onAddToCart(p: Product) {
-    console.log('Added to cart:', p);
-  }
+  constructor(private cartService: CartService) {}
+onAddToCart(p: Product) {
+    console.log('ADD CLICKED =>', p);
+    this.cartService.add(p);
+}
 }

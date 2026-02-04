@@ -1,37 +1,106 @@
-<div class="container py-4" *ngIf="product; else notFound">
-  <a routerLink="/products" class="btn btn-link p-0 mb-3">← Back to products</a>
+<div class="container py-4" *ngIf="product">
+  <a routerLink="/products" class="text-decoration-none d-inline-block mb-3">
+    ← Back to products
+  </a>
 
   <div class="row g-4 align-items-start">
-    <div class="col-md-5">
-      <div class="card shadow-sm">
-        <img [src]="product.image" class="w-100 details-img" [alt]="product.name" />
+    <!-- Image -->
+    <div class="col-12 col-md-5">
+      <div class="border rounded p-3 bg-white shadow-sm">
+        <img
+          [src]="product.image"
+          class="img-fluid rounded"
+          [alt]="product.name"
+          style="max-height: 420px; width: 100%; object-fit: contain"
+        />
       </div>
     </div>
 
-    <div class="col-md-7">
-      <h2 class="mb-2">{{ product.name }}</h2>
-      <p class="fs-4 fw-bold">{{ product.price }} EGP</p>
+    <!-- Info -->
+    <div class="col-12 col-md-7">
+      <div class="bg-white border rounded p-4 shadow-sm">
+        <h2 class="fw-bold mb-2">{{ product.name }}</h2>
 
-      <p
-        class="fw-semibold"
-        [ngClass]="{
-          'text-danger': product.stock === 0,
-          'text-success': product.stock > 0
-        }"
-      >
-        {{ product.stock === 0 ? 'Out of stock' : 'In stock' }}
-      </p>
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <h4 class="mb-0 fw-bold">{{ product.price }} EGP</h4>
 
-      <button class="btn btn-dark" [disabled]="product.stock === 0">
-        Add to cart
-      </button>
+          <span
+            class="badge"
+            [ngClass]="{
+              'bg-danger': product.stock === 0,
+              'bg-success': product.stock > 0
+            }"
+          >
+            {{ product.stock === 0 ? 'Out of stock' : 'In stock' }}
+          </span>
+
+          <span class="text-muted" *ngIf="product.rate">
+            ⭐ {{ product.rate }}/5
+          </span>
+        </div>
+
+        <!-- Description -->
+        <p class="text-muted mt-3 mb-4" *ngIf="product.description">
+          {{ product.description }}
+        </p>
+
+        <!-- Extra Details -->
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-sm-6" *ngIf="product.brand">
+            <div class="p-3 border rounded">
+              <div class="text-muted small">Brand</div>
+              <div class="fw-semibold">{{ product.brand }}</div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6" *ngIf="product.category">
+            <div class="p-3 border rounded">
+              <div class="text-muted small">Category</div>
+              <div class="fw-semibold">{{ product.category }}</div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6" *ngIf="product.color">
+            <div class="p-3 border rounded">
+              <div class="text-muted small">Color</div>
+              <div class="fw-semibold">{{ product.color }}</div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6" *ngIf="product.warranty">
+            <div class="p-3 border rounded">
+              <div class="text-muted small">Warranty</div>
+              <div class="fw-semibold">{{ product.warranty }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div class="mb-4" *ngIf="product.features?.length">
+          <h6 class="fw-bold mb-2">Features</h6>
+          <ul class="mb-0">
+            <li *ngFor="let feature of product.features">{{ feature }}</li>
+          </ul>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex flex-wrap gap-2">
+          <button class="btn btn-dark px-4" [disabled]="product.stock === 0">
+            Add to cart
+          </button>
+
+          <a routerLink="/products" class="btn btn-outline-secondary px-4">
+            Continue shopping
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<ng-template #notFound>
-  <div class="container py-5 text-center">
-    <h3>Product not found</h3>
-    <a routerLink="/products" class="btn btn-dark mt-3">Back</a>
-  </div>
-</ng-template>
+<!-- Optional: if product not found -->
+<div class="container py-5 text-center" *ngIf="!product">
+  <h3 class="fw-bold">Product not found</h3>
+  <p class="text-muted">The product you are looking for doesn't exist.</p>
+  <a routerLink="/products" class="btn btn-dark">Go to Products</a>
+</div>

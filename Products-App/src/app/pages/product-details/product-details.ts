@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
-import { PRODUCTS, Product } from '../products/product.data';
-
+import { PRODUCTS} from '../products/product.data';
+import { Product } from '../../shared/product.model';
 @Component({
   selector: 'app-product-details',
   standalone: true,
