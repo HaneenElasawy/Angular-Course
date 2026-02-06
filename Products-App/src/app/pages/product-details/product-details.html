@@ -8,9 +8,9 @@
     <div class="col-12 col-md-5">
       <div class="border rounded p-3 bg-white shadow-sm">
         <img
-          [src]="product.image"
+          [src]="product.thumbnail"
           class="img-fluid rounded"
-          [alt]="product.name"
+          [alt]="product.title"
           style="max-height: 420px; width: 100%; object-fit: contain"
         />
       </div>
@@ -19,7 +19,7 @@
     <!-- Info -->
     <div class="col-12 col-md-7">
       <div class="bg-white border rounded p-4 shadow-sm">
-        <h2 class="fw-bold mb-2">{{ product.name }}</h2>
+        <h2 class="fw-bold mb-2">{{ product.title }}</h2>
 
         <div class="d-flex align-items-center gap-3 mb-2">
           <h4 class="mb-0 fw-bold">{{ product.price }} EGP</h4>
@@ -34,8 +34,8 @@
             {{ product.stock === 0 ? 'Out of stock' : 'In stock' }}
           </span>
 
-          <span class="text-muted" *ngIf="product.rate">
-            ⭐ {{ product.rate }}/5
+          <span class="text-muted" *ngIf="product.rating">
+            ⭐ {{ product.rating }}/5
           </span>
         </div>
 
@@ -60,7 +60,7 @@
             </div>
           </div>
 
-          <div class="col-12 col-sm-6" *ngIf="product.color">
+          <div class="col-12 col-sm-6" *ngIf="product && product.color">
             <div class="p-3 border rounded">
               <div class="text-muted small">Color</div>
               <div class="fw-semibold">{{ product.color }}</div>

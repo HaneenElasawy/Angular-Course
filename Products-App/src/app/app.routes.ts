@@ -10,7 +10,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full' },
 
   { path: 'products', component: ProductsComponent },
-  { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
 
   { path: 'login', loadComponent: () => import('./pages/login/login').then(m => m.LoginComponent) },
   { path: 'register', loadComponent: () => import('./pages/register/register').then(m => m.RegisterComponent) },
