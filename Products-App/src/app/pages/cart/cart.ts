@@ -1,39 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService, CartItem } from '../../shared/cart.service';
 import { RouterLink } from '@angular/router';
+import { CartService, CartItem } from '../../shared/cart.service';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './cart.html',
-  styleUrls: ['./cart.css']
+  styleUrl: './cart.css'
 })
 export class CartComponent {
-  items: CartItem[] = [];
-  total = 0;
+  private cartService = inject(CartService);
 
-  constructor(private cartService: CartService) {
-    this.cartService.items$.subscribe((items: CartItem[]) => {
-      this.items = items;
-      this.total = this.cartService.getTotal();
-    });
+  get items(): CartItem[] {
+    return this.cartService.getItems();
   }
 
-  inc(item: CartItem) {
-    this.cartService.changeQty(item.product.id, item.qty + 1);
+  get total(): number {
+    return this.cartService.getTotal();
   }
 
-  dec(item: CartItem) {
-    this.cartService.changeQty(item.product.id, item.qty - 1);
+  inc(item: CartItem): void {
+    this.cartService.changeQty(item, +1);
   }
 
-  remove(id: number) {
+  dec(item: CartItem): void {
+    this.cartService.changeQty(item, -1);
+  }
+
+  remove(id: number): void {
     this.cartService.remove(id);
   }
 
-  clear() {
+  clear(): void {
     this.cartService.clear();
   }
 }

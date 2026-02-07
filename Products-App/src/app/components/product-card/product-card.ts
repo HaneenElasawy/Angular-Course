@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { Product } from '../../shared/product.model';
+import { Product } from '../../shared/products';
 
 @Component({
   selector: 'app-product-card',

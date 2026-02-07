@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { HttpHeaders } from '@angular/common/http';
 export interface Product {
   id: number;
   title: string;
@@ -41,7 +41,16 @@ export class ProductsService {
     return this.http.get<ProductsResponse>(`${this.baseUrl}/products`);
   }
 
-  getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}/products/${id}`);
-  }
+
+getProductById(id: number) {
+  return this.http.get<Product>(
+   `${this.baseUrl}/products/${id}`,
+    {
+      headers: new HttpHeaders({
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      })
+    }
+  );
+}
 }

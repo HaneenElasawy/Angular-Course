@@ -1,58 +1,39 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Product } from './product.model';
+import { Product } from './products';
+
 export interface CartItem {
   product: Product;
   qty: number;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class CartService {
+  private items: CartItem[] = [];
 
-  private itemsSubject = new BehaviorSubject<CartItem[]>([]);
-  items$ = this.itemsSubject.asObservable();
-
-  get items(): CartItem[] {
-    return this.itemsSubject.value;
+  add(product: Product): void {
+    const found = this.items.find(i => i.product.id === product.id);
+    if (found) found.qty++;
+    else this.items.push({ product, qty: 1 });
   }
 
-  add(product: Product) {
-    const items = [...this.items];
-    const index = items.findIndex(i => i.product.id === product.id);
-
-    if (index > -1) {
-      items[index].qty++;
-    } else {
-      items.push({ product, qty: 1 });
-    }
-
-    this.itemsSubject.next(items);
-  }
-
-  changeQty(productId: number, qty: number) {
-    const items = this.items.map(item =>
-      item.product.id === productId ? { ...item, qty } : item
-    ).filter(item => item.qty > 0);
-
-    this.itemsSubject.next(items);
-  }
-
-  remove(productId: number) {
-    this.itemsSubject.next(
-      this.items.filter(i => i.product.id !== productId)
-    );
-  }
-
-  clear() {
-    this.itemsSubject.next([]);
+  getItems(): CartItem[] {
+    return this.items;
   }
 
   getTotal(): number {
-    return this.items.reduce(
-      (sum, item) => sum + item.product.price * item.qty,
-      0
-    );
+    return this.items.reduce((sum, i) => sum + i.product.price * i.qty, 0);
+  }
+
+  remove(productId: number): void {
+    this.items = this.items.filter(i => i.product.id !== productId);
+  }
+
+  clear(): void {
+    this.items = [];
+  }
+
+  changeQty(item: CartItem, delta: number): void {
+    item.qty += delta;
+    if (item.qty <= 0) this.remove(item.product.id);
   }
 }

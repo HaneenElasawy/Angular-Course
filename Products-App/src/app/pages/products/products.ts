@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { CartService } from '../../shared/cart.service';
 import { ProductCardComponent } from '../../components/product-card/product-card';
 import { ProductsService, Product } from '../../shared/products';
 
@@ -15,7 +15,7 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   isLoading = true;
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService, private cartService: CartService) {}
 
   ngOnInit(): void {
     this.productsService.getProducts().subscribe({
@@ -28,5 +28,8 @@ export class ProductsComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+  onAddToCart(product: Product) {
+    this.cartService.add(product);
   }
 }

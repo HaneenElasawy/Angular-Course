@@ -99,8 +99,7 @@
 </div>
 
 <!-- Optional: if product not found -->
-<div class="container py-5 text-center" *ngIf="!product">
-  <h3 class="fw-bold">Product not found</h3>
-  <p class="text-muted">The product you are looking for doesn't exist.</p>
-  <a routerLink="/products" class="btn btn-dark">Go to Products</a>
+ <div class="container py-5 text-center" *ngIf="!isLoading && !product">
+<div class="container py-5 text-center" *ngIf="isLoading">
+  <h4 class="fw-bold">Loading...</h4>
 </div>
